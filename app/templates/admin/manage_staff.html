@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage Staff
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Manage Staff</h2>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+
+    <tr>
+
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Approved</th>
+        <th>Blacklisted</th>
+        <th>Actions</th>
+
+    </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for staff in staff_members %}
+
+    <tr>
+
+        <td>{{ staff.id }}</td>
+
+        <td>{{ staff.name }}</td>
+
+        <td>{{ staff.email }}</td>
+
+        <td>
+
+            {% if staff.approved %}
+
+                <span class="badge bg-success">Approved</span>
+
+            {% else %}
+
+                <span class="badge bg-warning text-dark">Pending</span>
+
+            {% endif %}
+
+        </td>
+
+        <td>
+
+            {% if staff.blacklisted %}
+
+                <span class="badge bg-danger">Yes</span>
+
+            {% else %}
+
+                <span class="badge bg-success">No</span>
+
+            {% endif %}
+
+        </td>
+
+        <td>
+
+            {% if not staff.approved %}
+
+            <a href="{{ url_for('admin.approve_staff', staff_id=staff.id) }}"
+               class="btn btn-success btn-sm">
+
+                Approve
+
+            </a>
+
+            {% endif %}
+
+            <a href="{{ url_for('admin.toggle_staff_blacklist', staff_id=staff.id) }}"
+               class="btn btn-danger btn-sm">
+
+                {% if staff.blacklisted %}
+                    Unblacklist
+                {% else %}
+                    Blacklist
+                {% endif %}
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+<a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary mt-3">
+    ← Back
+</a>
+
+{% endblock %}

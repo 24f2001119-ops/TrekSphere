@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}
+Booking History
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+
+        <h2 class="fw-bold">
+            {{ user.name }}'s Booking History
+        </h2>
+
+        <p class="text-muted">
+            View all trekking bookings made by this user.
+        </p>
+
+    </div>
+
+    <!-- Booking Table Card -->
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-dark text-white py-3 px-4">
+
+            <h5 class="mb-0">
+                Trek Bookings
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if bookings %}
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Booking ID</th>
+                            <th>Trek Name</th>
+                            <th>Booking Date</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for booking in bookings %}
+
+                        <tr>
+
+                            <td>#{{ booking.id }}</td>
+
+                            <td>{{ booking.trek.name }}</td>
+
+                            <td>{{ booking.booking_date.strftime("%d %b %Y") }}</td>
+
+                            <td>
+
+                                {% if booking.status == "Booked" %}
+
+                                    <span class="badge bg-success">
+                                        {{ booking.status }}
+                                    </span>
+
+                                {% elif booking.status == "Cancelled" %}
+
+                                    <span class="badge bg-danger">
+                                        {{ booking.status }}
+                                    </span>
+
+                                {% elif booking.status == "Completed" %}
+
+                                    <span class="badge bg-primary">
+                                        {{ booking.status }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        {{ booking.status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-info text-center">
+
+                No booking history found.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- Back Button -->
+
+    <div class="text-center mt-4">
+
+        <a href="{{ url_for('admin.manage_users') }}"
+           class="btn btn-outline-secondary px-4">
+
+            ← Back to Users
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

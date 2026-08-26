@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Add Trek</h2>
+
+    <form method="POST">
+
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.location.label(class="form-label") }}
+            {{ form.location(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.difficulty.label(class="form-label") }}
+            {{ form.difficulty(class="form-select") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.duration.label(class="form-label") }}
+            {{ form.duration(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.available_slots.label(class="form-label") }}
+            {{ form.available_slots(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.start_date.label(class="form-label") }}
+            {{ form.start_date(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.end_date.label(class="form-label") }}
+            {{ form.end_date(class="form-control") }}
+        </div>
+        <div class="mb-3">
+
+    {{ form.altitude.label }}
+
+    {{ form.altitude(class="form-control") }}
+
+</div>
+
+        <!-- Staff Dropdown -->
+        <div class="mb-3">
+            {{ form.staff_id.label(class="form-label") }}
+            {{ form.staff_id(class="form-select") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.status.label(class="form-label") }}
+            {{ form.status(class="form-select") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(class="form-control", rows=4) }}
+        </div>
+
+        <div class="d-grid">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+
+    </form>
+
+</div>
+<a href="{{ url_for('admin.manage_treks') }}" class="btn btn-secondary mt-3">
+    ← Back
+</a>
+
+{% endblock %}

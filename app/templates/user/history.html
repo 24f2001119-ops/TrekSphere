@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Trekking History</h2>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Trek</th>
+<th>Date</th>
+<th>Status</th>
+
+</tr>
+
+{% for booking in bookings %}
+
+<tr>
+
+<td>{{ booking.trek.name }}</td>
+
+<td>{{ booking.booking_date.strftime("%d-%m-%Y") }}</td>
+
+<td>{{ booking.status }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+<a href="{{ url_for('user.dashboard') }}" class="btn btn-secondary mt-3">
+    ← Back
+</a>
+
+{% endblock %}

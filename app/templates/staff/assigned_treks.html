@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+Assigned Treks
+{% endblock %}
+
+{% block content %}
+
+<h2>Assigned Treks</h2>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Name</th>
+<th>Location</th>
+<th>Status</th>
+<th>Slots</th>
+<th>Action</th>
+
+</tr>
+
+{% for trek in treks %}
+
+<tr>
+
+<td>{{ trek.name }}</td>
+
+<td>{{ trek.location }}</td>
+
+<td>{{ trek.status }}</td>
+
+<td>{{ trek.available_slots }}</td>
+
+<td>
+
+<a href="{{ url_for('staff.update_trek', trek_id=trek.id) }}"
+class="btn btn-warning btn-sm">
+
+Update
+
+</a>
+
+<a href="{{ url_for('staff.participants', trek_id=trek.id) }}"
+class="btn btn-info btn-sm">
+
+Participants
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+<a href="{{ url_for('staff.dashboard') }}" class="btn btn-secondary mt-3">
+    ← Back
+</a>
+
+{% endblock %}

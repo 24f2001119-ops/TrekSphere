@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage Users
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Manage Users</h2>
+
+<form method="GET"
+      action="{{ url_for('admin.search_users') }}"
+      class="row mb-3">
+
+    <div class="col-md-8">
+
+        <input
+            type="text"
+            name="query"
+            class="form-control"
+            placeholder="Search by Name or Email"
+            value="{{ query if query else '' }}"
+        >
+
+    </div>
+
+    <div class="col-md-4">
+
+        <button class="btn btn-primary">
+
+            Search
+
+        </button>
+
+    </div>
+
+</form>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Blacklisted</th>
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user.id }}</td>
+
+<td>
+    {% if user.blacklisted %}
+
+    <span class="badge bg-danger">{{ user.name }}</span>
+     
+    {% else %}
+    {{ user.name }}
+
+    {% endif %}
+</td>
+
+<td>{{ user.email }}</td>
+
+<td>{{ user.phone }}</td>
+
+<td>
+
+{% if user.blacklisted %}
+
+<span class="badge bg-danger">
+
+Yes
+
+</span>
+
+{% else %}
+
+<span class="badge bg-success">
+
+No
+
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+<a
+href="{{ url_for('admin.toggle_user_blacklist', user_id=user.id) }}"
+class="btn btn-warning btn-sm">
+
+{% if user.blacklisted %}
+
+Unblacklist
+
+{% else %}
+
+Blacklist
+
+{% endif %}
+
+</a>
+
+<a
+href="{{ url_for('admin.user_bookings', user_id=user.id) }}"
+class="btn btn-info btn-sm">
+
+History
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+<a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary mt-3">
+    ← Back
+</a>
+
+{% endblock %}

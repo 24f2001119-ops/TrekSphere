@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+All User Bookings
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">All User Bookings</h2>
+
+    {% if bookings %}
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Booking ID</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Trek</th>
+                <th>Location</th>
+                <th>Booking Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for booking in bookings %}
+
+            <tr>
+
+                <td>{{ booking.id }}</td>
+
+                <td>{{ booking.user.name }}</td>
+
+                <td>{{ booking.user.email }}</td>
+
+                <td>{{ booking.user.phone }}</td>
+
+                <td>{{ booking.trek.name }}</td>
+
+                <td>{{ booking.trek.location }}</td>
+
+                <td>{{ booking.booking_date.strftime("%d-%m-%Y %H:%M") }}</td>
+
+                <td>
+                    <span class="badge bg-primary">
+                        {{ booking.status }}
+                    </span>
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="alert alert-warning">
+        No bookings found.
+    </div>
+
+    {% endif %}
+
+    <a href="{{ url_for('admin.dashboard') }}"
+       class="btn btn-secondary mt-3">
+        Back to Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>My Bookings</h2>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Trek</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+{% for booking in bookings %}
+
+<tr>
+
+<td>{{ booking.trek.name }}</td>
+
+<td>{{ booking.status }}</td>
+
+<td>
+
+{% if booking.status=="Booked" %}
+
+<a href="{{ url_for('user.cancel_booking', booking_id=booking.id) }}"
+class="btn btn-danger">
+
+Cancel
+
+</a>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+<a href="{{ url_for('user.dashboard') }}" class="btn btn-secondary mt-3">
+    ← Back
+</a>
+
+{% endblock %}

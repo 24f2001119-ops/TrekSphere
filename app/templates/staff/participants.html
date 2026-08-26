@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Participants
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ trek.name }} Participants</h2>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Name</th>
+<th>Email</th>
+<th>Booking Date</th>
+
+</tr>
+
+{% for booking in bookings %}
+
+<tr>
+
+<td>{{ booking.user.name }}</td>
+
+<td>{{ booking.user.email }}</td>
+
+<td>{{ booking.booking_date.strftime("%d-%m-%Y") }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+<a href="{{ url_for('staff.dashboard') }}" class="btn btn-secondary mt-3">
+    ← Back
+</a>
+
+{% endblock %}

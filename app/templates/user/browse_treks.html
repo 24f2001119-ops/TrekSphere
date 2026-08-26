@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Available Treks</h2>
+
+<form method="GET">
+
+<div class="row mb-3">
+
+<div class="col">
+
+<input
+type="text"
+name="location"
+placeholder="Location"
+class="form-control">
+
+</div>
+
+<div class="col">
+
+<select
+name="difficulty"
+class="form-select">
+
+<option value="">
+
+All Difficulty
+
+</option>
+
+<option>
+
+Easy
+
+</option>
+
+<option>
+
+Moderate
+
+</option>
+
+<option>
+
+Hard
+
+</option>
+
+</select>
+
+</div>
+
+<div class="col">
+
+<button class="btn btn-primary">
+
+Search
+
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Name</th>
+<th>Location</th>
+<th>Difficulty</th>
+<th>Slots</th>
+<th></th>
+</tr>
+
+{% for trek in treks %}
+
+<tr>
+
+<td>{{ trek.name }}</td>
+
+<td>{{ trek.location }}</td>
+
+<td>{{ trek.difficulty }}</td>
+
+<td>{{ trek.available_slots }}</td>
+
+<td>
+
+<a href="{{ url_for('user.book_trek', trek_id=trek.id) }}"
+class="btn btn-success">
+
+Book
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+<a href="{{ url_for('user.dashboard') }}" class="btn btn-secondary mt-3">
+    ← Back
+</a>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>User Dashboard</h2>
+
+<p>Total Bookings : {{ total_bookings }}</p>
+
+<a href="{{ url_for('user.browse_treks') }}"
+class="btn btn-primary">
+
+Browse Treks
+
+</a>
+
+<a href="{{ url_for('user.my_bookings') }}"
+class="btn btn-success">
+
+My Bookings
+
+</a>
+
+<a href="{{ url_for('user.profile') }}"
+class="btn btn-warning">
+
+Profile
+
+</a>
+
+{% endblock %}
